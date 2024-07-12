@@ -83,7 +83,7 @@ onMounted(() => {
                     </div>
                     <div
                         v-show="!rail && !mobile"
-                        class="text-secundario font-weight-bold"
+                        class="text-secundario font-weight-bold text-body-1"
                     >
                         {{ oConfiguracion.razon_social }}
                     </div>

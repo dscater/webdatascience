@@ -58,7 +58,7 @@ onMounted(() => {
                                 ></v-img>
                             </v-card-text>
                             <v-card-title class="bg-principal">
-                                <h3 class="text-center mb-0 pb-0 text-white text-h4">
+                                <h3 class="text-center mb-0 pb-0 text-h4 text-secundario font-weight-bold">
                                     {{ oConfiguracion.razon_social }}
                                 </h3>
                             </v-card-title>
@@ -99,7 +99,7 @@ onMounted(() => {
                                                 placeholder="Ingresa tu usuario"
                                                 prepend-inner-icon="mdi-account"
                                                 variant="outlined"
-                                                color="primary"
+                                                color="orange-accent-4"
                                                 autocomplete="false"
                                                 v-model="form.usuario"
                                                 autofocus=""
@@ -136,7 +136,7 @@ onMounted(() => {
                                                 placeholder="Ingresa tu contraseña"
                                                 prepend-inner-icon="mdi-lock-outline"
                                                 variant="outlined"
-                                                color="primary"
+                                                color="orange-accent-4"
                                                 @click:append-inner="
                                                     visible = !visible
                                                 "

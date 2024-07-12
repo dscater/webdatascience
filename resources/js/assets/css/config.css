@@ -1,8 +1,8 @@
 :root {
-    --principal: #0866FF;
+    --principal: #0866ff;
     --principal_hover: #40a5f7;
     --principal_transparent: #2a99f3c2;
-    --secundario: #ffffff;
+    --secundario: #ff6d00;
     --secundario2: #ffffff;
     --secundario_hover: #ffffff;
     --fondo_app: #f2f2f2;
@@ -17,6 +17,10 @@ html {
     overflow-y: overlay;
 }
 
+.text-secundario {
+    color: var(--secundario)!important;
+}
+
 body,
 button,
 input,
@@ -27,7 +31,7 @@ textarea {
     font-family: Arial, sans-serif !important; /* Cambia 'Roboto' por el nombre de tu fuente */
 }
 
-.bg-principal{
+.bg-principal {
     background-color: var(--principal);
     color: white;
 }
@@ -41,7 +45,7 @@ textarea {
 }
 
 .text-no-visto {
-    color: rgb(0, 204, 0)!important;
+    color: rgb(0, 204, 0) !important;
 }
 
 .ubicacion,
@@ -104,7 +108,7 @@ iframe {
 /* SIDEBAR */
 .__sidebar .active {
     border-radius: 8px;
-    background-color: var(--principal);
+    background-color: var(--secundario);
     color: white;
 }
 

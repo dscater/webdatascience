@@ -22,12 +22,10 @@ const user_logeado = ref({
 });
 
 const submenus = {
+    // graficos
+    "reportes.usuarios": "Graficos",
+    // reportes
     "reportes.usuarios": "Reportes",
-    "reportes.ingresos": "Reportes",
-    "reportes.egresos": "Reportes",
-    "reportes.presupuestos": "Reportes",
-    "reportes.ganancias": "Reportes",
-    "reportes.movimientos": "Reportes",
 };
 
 const route_current = ref("");
@@ -149,10 +147,7 @@ const scrollActive = () => {
                 class="text-caption pa-0 px-5 bg-grey-lighten-3"
                 v-if="
                     oUser.permisos.includes('usuarios.index') ||
-                    oUser.permisos.includes('categorias.index') ||
-                    oUser.permisos.includes('conceptos.index') ||
-                    oUser.permisos.includes('ingresos.index') ||
-                    oUser.permisos.includes('egresos.index')
+                    oUser.permisos.includes('categorias.index')
                 "
             >
                 <span v-if="rail && !mobile" class="text-center d-block"
@@ -164,94 +159,616 @@ const scrollActive = () => {
             >
             <v-list-item
                 :class="[
-                    route_current == 'categorias.index' ? 'active' : '',
+                    route_current == 'usuarios.index' ? 'active' : '',
                     drawer ? 'px-3' : '',
                 ]"
                 class="mx-3"
-                v-if="oUser.permisos.includes('categorias.index')"
-                prepend-icon="mdi-playlist-edit"
-                @click="cambiarUrl(route('categorias.index'))"
+                v-if="oUser.permisos.includes('usuarios.index')"
+                prepend-icon="mdi-upload"
+                @click="cambiarUrl(route('usuarios.index'))"
                 link
             >
-                <v-list-item-title>Categorías</v-list-item-title>
+                <v-list-item-title>Importar archivo</v-list-item-title>
                 <v-tooltip
                     v-if="rail && !mobile"
                     color="white"
                     activator="parent"
                     location="end"
-                    >Categorías</v-tooltip
+                    >Importar archivo</v-tooltip
                 >
             </v-list-item>
-            <v-list-item
-                :class="[
-                    route_current == 'conceptos.index' ? 'active' : '',
-                    drawer ? 'px-3' : '',
-                ]"
+            <!-- SUBGROUP -->
+            <v-list-group
+                value="Graficos"
                 class="mx-3"
-                v-if="oUser.permisos.includes('conceptos.index')"
-                prepend-icon="mdi-tag-multiple"
-                @click="cambiarUrl(route('conceptos.index'))"
-                link
+                v-if="
+                    oUser.permisos.includes('reportes.usuarios') ||
+                    oUser.permisos.includes('reportes.ingresos')
+                "
             >
-                <v-list-item-title>Conceptos de Movimientos</v-list-item-title>
-                <v-tooltip
-                    v-if="rail && !mobile"
-                    color="white"
-                    activator="parent"
-                    location="end"
-                    >Conceptos de Movimientos</v-tooltip
+                <template v-slot:activator="{ props }">
+                    <v-list-item
+                        v-bind="props"
+                        prepend-icon="mdi-file-document-multiple"
+                        title="Análisis de datos"
+                        :class="[
+                            route_current == 'reporutes.usuarios' ||
+                            route_current == 'reportes.ingresos'
+                                ? 'active'
+                                : '',
+                        ]"
+                    >
+                        <v-tooltip
+                            v-if="rail && !mobile"
+                            color="white"
+                            activator="parent"
+                            location="end"
+                            >Análisis de datos</v-tooltip
+                        ></v-list-item
+                    >
+                </template>
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Cantidad de Población de Mujeres por Distrito"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
                 >
-            </v-list-item>
-            <v-list-item
-                :class="[
-                    route_current == 'ingresos.index' ||
-                    route_current == 'ingresos.create' ||
-                    route_current == 'ingresos.edit' ||
-                    route_current == 'ingresos.show'
-                        ? 'active'
-                        : '',
-                    drawer ? 'px-3' : '',
-                ]"
-                class="mx-3"
-                v-if="oUser.permisos.includes('ingresos.index')"
-                prepend-icon="mdi-clipboard-arrow-left"
-                @click="cambiarUrl(route('ingresos.index'))"
-                link
-            >
-                <v-list-item-title>Ingresos Económicos</v-list-item-title>
-                <v-tooltip
-                    v-if="rail && !mobile"
-                    color="white"
-                    activator="parent"
-                    location="end"
-                    >Ingresos Económicos</v-tooltip
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Cantidad de Población de Mujeres por
+                        Distrito</v-tooltip
+                    ></v-list-item
                 >
-            </v-list-item>
-            <v-list-item
-                :class="[
-                    route_current == 'egresos.index' ||
-                    route_current == 'egresos.create' ||
-                    route_current == 'egresos.edit' ||
-                    route_current == 'egresos.show'
-                        ? 'active'
-                        : '',
-                    drawer ? 'px-3' : '',
-                ]"
-                class="mx-3"
-                v-if="oUser.permisos.includes('egresos.index')"
-                prepend-icon="mdi-clipboard-arrow-right"
-                @click="cambiarUrl(route('egresos.index'))"
-                link
-            >
-                <v-list-item-title>Egresos Económicos</v-list-item-title>
-                <v-tooltip
-                    v-if="rail && !mobile"
-                    color="white"
-                    activator="parent"
-                    location="end"
-                    >Egresos Económicos</v-tooltip
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Humillaciones y Menos Precios por parte de la Población"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
                 >
-            </v-list-item>
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Humillaciones y Menos Precios por parte de la
+                        Población</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Humillaciones y Menos Precios por actores Principales"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Humillaciones y Menos Precios por actores
+                        Principales</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Agresiones Físicas en lugares Públicos"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Agresiones Físicas en lugares Públicos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Agresiones Verbales de Carácter Sexual en lugares Públicos"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Agresiones Verbales de Carácter Sexual en lugares
+                        Públicos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Agresiones de Toques Impúdicos sin Consentimiento en lugares Públicos"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Agresiones de Toques Impúdicos sin Consentimiento en
+                        lugares Públicos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Obligaron a tener Relaciones Sexuales por distintos actores Principales"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Obligaron a tener Relaciones Sexuales por distintos
+                        actores Principales</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a la policía FELCV"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a la policía FELCV</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda al Servicio Legal Integral Municipal (SLIM)"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda al Servicio Legal Integral Municipal
+                        (SLIM)</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a la Defensoría de la Niñez y Adolescencia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a la Defensoría de la Niñez y
+                        Adolescencia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a otra Institución"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a otra Institución</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a algún Familia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a algún Familia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a una Amiga"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a una Amiga</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Ayuda a un Amigo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Ayuda a un Amigo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Pidió Ayuda a otra Persona o Autoridad"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Pidió Ayuda a otra Persona o Autoridad</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda por Vergüenza"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda por Vergüenza</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda porque no Quería que se Sepa"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda porque no Quería que se Sepa</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda por Miedo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda por Miedo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda por Amenaza"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda por Amenaza</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda porque la Familia le Pidió no Hacerlo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda porque la Familia le Pidió no
+                        Hacerlo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda porque se trató de un hecho sin importancia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda porque se trató de un hecho sin
+                        importancia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda porque no Sabía que Podía Denunciar"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda porque no Sabía que Podía
+                        Denunciar</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda porque no Cree en la Justicia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda porque no Cree en la Justicia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="No Pidió Ayuda por otro Motivo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >No Pidió Ayuda por otro Motivo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Denuncias de Agresiones"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Denuncias de Agresiones</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia por Vergüenza"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia por
+                        Vergüenza</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia porque No Querían que se sepa"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia porque No Querían
+                        que se sepa</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia por Miedo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia por
+                        Miedo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia por Amenaza"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia por
+                        Amenaza</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia porque su Familia la convenció de no Hacerlo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia porque su Familia
+                        la convenció de no Hacerlo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia porque se Trató de un Hecho sin Importancia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia porque se Trató de
+                        un Hecho sin Importancia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia porque no Sabía que se Podía Denunciar"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia porque no Sabía que
+                        se Podía Denunciar</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia porque No Cree en la Justicia"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia porque No Cree en
+                        la Justicia</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que no Presentaron Denuncia por otro Motivo"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que no Presentaron Denuncia por otro
+                        Motivo</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Mujeres que recibieron Atención Médica o Psicológica por estos Hechos"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        drawer ? 'px-3' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    link
+                >
+                    <v-tooltip color="white" activator="parent" location="end"
+                        >Mujeres que recibieron Atención Médica o Psicológica
+                        por estos Hechos</v-tooltip
+                    ></v-list-item
+                >
+            </v-list-group>
             <v-list-item
                 :class="[
                     route_current == 'usuarios.index' ? 'active' : '',
@@ -288,11 +805,7 @@ const scrollActive = () => {
                 class="mx-3"
                 v-if="
                     oUser.permisos.includes('reportes.usuarios') ||
-                    oUser.permisos.includes('reportes.ingresos')||
-                    oUser.permisos.includes('reportes.egresos')||
-                    oUser.permisos.includes('reportes.presupuestos')||
-                    oUser.permisos.includes('reportes.ganancias')||
-                    oUser.permisos.includes('reportes.movimientos')
+                    oUser.permisos.includes('reportes.ingresos')
                 "
             >
                 <template v-slot:activator="{ props }">
@@ -302,10 +815,10 @@ const scrollActive = () => {
                         title="Reportes"
                         :class="[
                             route_current == 'reporutes.usuarios' ||
-                            route_current == 'reportes.ingresos'||
-                            route_current == 'reportes.egresos'||
-                            route_current == 'reportes.presupuestos'||
-                            route_current == 'reportes.ganancias'||
+                            route_current == 'reportes.ingresos' ||
+                            route_current == 'reportes.egresos' ||
+                            route_current == 'reportes.presupuestos' ||
+                            route_current == 'reportes.ganancias' ||
                             route_current == 'reportes.movimientos'
                                 ? 'active'
                                 : '',
@@ -382,7 +895,9 @@ const scrollActive = () => {
                     prepend-icon="mdi-chevron-right"
                     title="Presupuestos"
                     :class="[
-                        route_current == 'reportes.presupuestos' ? 'active' : '',
+                        route_current == 'reportes.presupuestos'
+                            ? 'active'
+                            : '',
                         drawer ? 'px-3' : '',
                     ]"
                     @click="cambiarUrl(route('reportes.presupuestos'))"
@@ -426,10 +941,7 @@ const scrollActive = () => {
                     @click="cambiarUrl(route('reportes.movimientos'))"
                     link
                 >
-                    <v-tooltip
-                        color="white"
-                        activator="parent"
-                        location="end"
+                    <v-tooltip color="white" activator="parent" location="end"
                         >Movimientos de Ingresos y Egresos Económicos</v-tooltip
                     ></v-list-item
                 >
