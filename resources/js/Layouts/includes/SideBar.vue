@@ -147,7 +147,8 @@ const scrollActive = () => {
                 class="text-caption pa-0 px-5 bg-grey-lighten-3"
                 v-if="
                     oUser.permisos.includes('usuarios.index') ||
-                    oUser.permisos.includes('categorias.index')
+                    oUser.permisos.includes('importacions.index')||
+                    oUser.permisos.includes('catergorias.index')
                 "
             >
                 <span v-if="rail && !mobile" class="text-center d-block"
@@ -159,13 +160,13 @@ const scrollActive = () => {
             >
             <v-list-item
                 :class="[
-                    route_current == 'usuarios.index' ? 'active' : '',
+                    route_current == 'importacions.index' ? 'active' : '',
                     drawer ? 'px-3' : '',
                 ]"
                 class="mx-3"
-                v-if="oUser.permisos.includes('usuarios.index')"
+                v-if="oUser.permisos.includes('importacions.index')"
                 prepend-icon="mdi-upload"
-                @click="cambiarUrl(route('usuarios.index'))"
+                @click="cambiarUrl(route('importacions.index'))"
                 link
             >
                 <v-list-item-title>Importar archivo</v-list-item-title>
@@ -208,14 +209,14 @@ const scrollActive = () => {
                     >
                 </template>
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    v-if="oUser.permisos.includes('poblacion_mujers.index')"
                     prepend-icon="mdi-chevron-right"
                     title="Cantidad de Población de Mujeres por Distrito"
                     :class="[
-                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        route_current == 'poblacion_mujers.index' ? 'active' : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    @click="cambiarUrl(route('poblacion_mujers.index'))"
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"

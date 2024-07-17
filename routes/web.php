@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\ImportacionController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PoblacionMujerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
@@ -78,6 +80,21 @@ Route::middleware('auth')->group(function () {
     // Route::resource("categorias", CategoriaController::class)->only(
     //     ["index", "store", "update", "show", "destroy"]
     // );
+
+    // IMPORTACIÓN
+    Route::get("/importacions/paginado", [ImportacionController::class, 'paginado'])->name("importacions.paginado");
+    Route::get("/importacions/listado", [ImportacionController::class, 'listado'])->name("importacions.listado");
+    Route::resource("importacions", ImportacionController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );
+
+    // POBLACION MUJERES
+    Route::get("/poblacion_mujers/grafico", [PoblacionMujerController::class, 'grafico'])->name("poblacion_mujers.grafico");
+    Route::resource("poblacion_mujers", PoblacionMujerController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );
+
+
 
     // REPORTES
     Route::get('reportes/usuarios', [ReporteController::class, 'usuarios'])->name("reportes.usuarios");

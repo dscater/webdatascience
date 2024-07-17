@@ -1,52 +1,68 @@
-import { useForm } from "@inertiajs/vue3";
 import axios from "axios";
-import { onMounted, reactive } from "vue";
+import { onMounted, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
 
-const oSalida = reactive({
+const oImportacion = ref({
     id: 0,
-    tipo_salida_id: null,
-    descripcion: "",
-    unidad_solicitante: "",
-    fecha_salida: "",
-    salida_detalles: reactive([]),
-    eliminados: reactive([]),
+    nombre: "",
+    paterno: "",
+    materno: "",
+    ci: "",
+    ci_exp: "",
+    dir: "",
+    email: "",
+    fono: "",
+    tipo: "",
+    foto: "",
+    acceso: 0 + "",
     _method: "POST",
 });
 
-export const useSalidas = () => {
+export const useImportacions = () => {
     const { flash } = usePage().props;
-    const getSalidas = async (data) => {
+    const getImportacions = async () => {
         try {
-            const response = await axios.get(route("salidas.listado"), {
+            const response = await axios.get(route("importacions.listado"), {
+                headers: { Accept: "application/json" },
+            });
+            return response.data.importacions;
+        } catch (err) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: `${
+                    flash.error
+                        ? flash.error
+                        : err.response?.data
+                        ? err.response?.data?.message
+                        : "Hay errores en el formulario"
+                }`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Aceptar`,
+            });
+            throw err; // Puedes manejar el error según tus necesidades
+        }
+    };
+
+    const getImportacionsByTipo = async (data) => {
+        try {
+            const response = await axios.get(route("importacions.byTipo"), {
                 headers: { Accept: "application/json" },
                 params: data,
             });
-            return response.data.salidas;
-        } catch (err) {
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: `${
-                    flash.error
-                        ? flash.error
-                        : err.response?.data
-                        ? err.response?.data?.message
-                        : "Hay errores en el formulario"
-                }`,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: `Aceptar`,
-            });
-            throw err; // Puedes manejar el error según tus necesidades
+            return response.data.importacions;
+        } catch (error) {
+            console.error("Error:", error);
+            throw error; // Puedes manejar el error según tus necesidades
         }
     };
 
-    const getSalidasApi = async (data) => {
+    const getImportacionsApi = async (data) => {
         try {
-            const response = await axios.get(route("salidas.paginado", data), {
+            const response = await axios.get(route("importacions.paginado", data), {
                 headers: { Accept: "application/json" },
             });
-            return response.data.salidas;
+            return response.data.importacions;
         } catch (err) {
             Swal.fire({
                 icon: "error",
@@ -64,9 +80,9 @@ export const useSalidas = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
-    const saveSalida = async (data) => {
+    const saveImportacion = async (data) => {
         try {
-            const response = await axios.post(route("salidas.store", data), {
+            const response = await axios.post(route("importacions.store", data), {
                 headers: { Accept: "application/json" },
             });
             Swal.fire({
@@ -95,9 +111,9 @@ export const useSalidas = () => {
         }
     };
 
-    const deleteSalida = async (id) => {
+    const deleteImportacion = async (id) => {
         try {
-            const response = await axios.delete(route("salidas.destroy", id), {
+            const response = await axios.delete(route("importacions.destroy", id), {
                 headers: { Accept: "application/json" },
             });
             Swal.fire({
@@ -126,50 +142,52 @@ export const useSalidas = () => {
         }
     };
 
-    const setSalida = (
-        item = null,
-        proveedor = false,
-        tipo_salida = false
-    ) => {
+    const setImportacion = (item = null) => {
         if (item) {
-            oSalida.id = item.id;
-            oSalida.proveedor_id = item.proveedor_id;
-            oSalida.tipo_salida_id = item.tipo_salida_id;
-            if (tipo_salida) {
-                oSalida.tipo_salida = item.tipo_salida;
-                oSalida.fecha_salida_t = item.fecha_salida_t;
-            }
-            oSalida.descripcion = item.descripcion;
-            oSalida.unidad_solicitante = item.unidad_solicitante;
-            oSalida.fecha_salida = item.fecha_salida;
-            oSalida.salida_detalles = reactive([...item.salida_detalles]);
-            oSalida.eliminados = reactive([]);
-            oSalida._method = "PUT";
-            return oSalida;
+            oImportacion.value.id = item.id;
+            oImportacion.value.nombre = item.nombre;
+            oImportacion.value.paterno = item.paterno;
+            oImportacion.value.materno = item.materno;
+            oImportacion.value.ci = item.ci;
+            oImportacion.value.ci_exp = item.ci_exp;
+            oImportacion.value.dir = item.dir;
+            oImportacion.value.email = item.email;
+            oImportacion.value.fono = item.fono;
+            oImportacion.value.tipo = item.tipo;
+            oImportacion.value.foto = item.foto;
+            oImportacion.value.acceso = item.acceso + "";
+            oImportacion.value._method = "PUT";
+            return oImportacion;
         }
         return false;
     };
 
-    const limpiarSalida = () => {
-        oSalida.id = 0;
-        oSalida.tipo_salida_id = null;
-        oSalida.descripcion = "";
-        oSalida.unidad_solicitante = "";
-        oSalida.fecha_salida = "";
-        oSalida.salida_detalles = reactive([]);
-        oSalida.eliminados = reactive([]);
-        oSalida._method = "POST";
+    const limpiarImportacion = () => {
+        oImportacion.value.id = 0;
+        oImportacion.value.nombre = "";
+        oImportacion.value.paterno = "";
+        oImportacion.value.materno = "";
+        oImportacion.value.ci = "";
+        oImportacion.value.ci_exp = "";
+        oImportacion.value.dir = "";
+        oImportacion.value.email = "";
+        oImportacion.value.fono = "";
+        oImportacion.value.tipo = "";
+        oImportacion.value.foto = "";
+        oImportacion.value.acceso = 0 + "";
+        oImportacion.value._method = "POST";
     };
 
     onMounted(() => {});
 
     return {
-        oSalida,
-        getSalidas,
-        getSalidasApi,
-        saveSalida,
-        deleteSalida,
-        setSalida,
-        limpiarSalida,
+        oImportacion,
+        getImportacions,
+        getImportacionsApi,
+        saveImportacion,
+        deleteImportacion,
+        setImportacion,
+        limpiarImportacion,
+        getImportacionsByTipo,
     };
 };

@@ -35,7 +35,7 @@ watch(
 
 const { flash } = usePage().props;
 
-const listTipos = ["GERENTE", "OPERADOR"];
+const listTipos = ["ADMINISTRADOR", "ANALISTA DE DATOS"];
 const listExpedido = [
     { value: "LP", label: "La Paz" },
     { value: "CB", label: "Cochabamba" },

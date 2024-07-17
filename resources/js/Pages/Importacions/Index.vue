@@ -7,13 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Egresos",
-        disabled: false,
-        url: route("egresos.index"),
-        name_url: "egresos.index",
-    },
-    {
-        title: "Nuevo",
+        title: "Importar archivo",
         disabled: false,
         url: "",
         name_url: "",
@@ -24,27 +18,40 @@ const breadbrums = [
 import BreadBrums from "@/Components/BreadBrums.vue";
 import { useApp } from "@/composables/useApp";
 import { Head } from "@inertiajs/vue3";
-import { onMounted } from "vue";
+import { useImportacions } from "@/composables/importacions/useImportacions";
+import { ref, onMounted } from "vue";
 import { useMenu } from "@/composables/useMenu";
-import { useEgresos } from "@/composables/egresos/useEgresos";
-import Formulario from "./parcials/Formulario.vue";
 const { mobile, identificaDispositivo } = useMenu();
 const { setLoading } = useApp();
-const { oEgreso, limpiarEgreso } = useEgresos();
-limpiarEgreso();
 onMounted(() => {
+    identificaDispositivo();
     setTimeout(() => {
         setLoading(false);
     }, 300);
 });
+
+const { setImportacion } = useImportacions();
+
+const search = ref("");
 </script>
 <template>
-    <Head title="Egresos"></Head>
+    <Head title="Importar archivo"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
-            <v-col cols="12" sm="12" md="12">
-                <Formulario></Formulario>
+            <v-col cols="12">
+                <v-card flat>
+                    <v-card-title>
+                        <v-row class="bg-principal d-flex align-center pa-3">
+                            <v-col cols="12" sm="6" md="4">
+                                Importar archivo
+                            </v-col>
+                        </v-row>
+                    </v-card-title>
+                    <v-card-text> 
+                            
+                    </v-card-text>
+                </v-card>
             </v-col>
         </v-row>
     </v-container>

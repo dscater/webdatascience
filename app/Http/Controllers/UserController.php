@@ -23,6 +23,13 @@ class UserController extends Controller
             "usuarios.edit",
             "usuarios.destroy",
 
+            "importacions.index",
+            "importacions.create",
+            "importacions.edit",
+            "importacions.destroy",
+
+            "poblacion_mujers.index",
+
             "configuracions.index",
             "configuracions.create",
             "configuracions.edit",
