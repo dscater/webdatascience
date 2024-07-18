@@ -11,6 +11,14 @@ class Distrito extends Model
 
     protected $fillable = ["distrito"];
 
+
+    protected $appends = ["nombre_distrito"];
+
+    public function getNombreDistritoAttribute()
+    {
+        return self::getNameDistrito($this->distrito);
+    }
+
     public static function getNameDistrito($distrito)
     {
         $listDistritos = [
@@ -20,6 +28,9 @@ class Distrito extends Model
             "6" => "DISTRITO 6",
         ];
 
-        return $listDistritos[$distrito];
+        if ($listDistritos[$distrito]) {
+            return $listDistritos[$distrito];
+        };
+        return "";
     }
 }

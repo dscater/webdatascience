@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\DistritoController;
 use App\Http\Controllers\ImportacionController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PoblacionMujerController;
@@ -80,6 +81,12 @@ Route::middleware('auth')->group(function () {
     // Route::resource("categorias", CategoriaController::class)->only(
     //     ["index", "store", "update", "show", "destroy"]
     // );
+
+    // DISTRITOS
+    Route::get("/distritos/listado", [DistritoController::class, 'listado'])->name("distritos.listado");
+    Route::resource("distritos", DistritoController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );
 
     // IMPORTACIÓN
     Route::get("/importacions/paginado", [ImportacionController::class, 'paginado'])->name("importacions.paginado");
