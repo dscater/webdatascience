@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\DistritoController;
+use App\Http\Controllers\HmpPoblacionController;
 use App\Http\Controllers\ImportacionController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PoblacionMujerController;
@@ -100,6 +101,13 @@ Route::middleware('auth')->group(function () {
     Route::resource("poblacion_mujers", PoblacionMujerController::class)->only(
         ["index", "store", "update", "show", "destroy"]
     );
+
+       // HMP POBLACION
+       Route::get("/hmp_poblacions/grafico", [HmpPoblacionController::class, 'grafico'])->name("hmp_poblacions.grafico");
+       Route::resource("hmp_poblacions", HmpPoblacionController::class)->only(
+           ["index", "store", "update", "show", "destroy"]
+       );
+   
 
 
 

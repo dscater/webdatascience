@@ -39,7 +39,10 @@ class PoblacionMujerController extends Controller
         if ($filtro == 'todos') {
             $data = [];
             foreach ($distritos as $distrito) {
-                $total = PoblacionMujer::where("distrito_id", $distrito->id)->sum("cantidad");
+                $total = PoblacionMujer::select("poblacion_mujeres.cantidad")
+                    ->join("anios", "anios.id", "=", "poblacion_mujeres.anio_id")
+                    ->where("anios.anio", $gestion)
+                    ->where("distrito_id", $distrito->id)->sum("cantidad");
 
                 $data[] = [Distrito::getNameDistrito($distrito->distrito), (float)$total];
             }

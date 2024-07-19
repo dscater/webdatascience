@@ -225,14 +225,14 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    v-if="oUser.permisos.includes('hmp_poblacions.index')"
                     prepend-icon="mdi-chevron-right"
                     title="Humillaciones y Menos Precios por parte de la Población"
                     :class="[
-                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        route_current == 'hmp_poblacions.index' ? 'active' : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    @click="cambiarUrl(route('hmp_poblacions.index'))"
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"

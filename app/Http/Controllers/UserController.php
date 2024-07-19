@@ -30,6 +30,8 @@ class UserController extends Controller
 
             "poblacion_mujers.index",
 
+            "hmp_poblacions.index",
+
             "configuracions.index",
             "configuracions.create",
             "configuracions.edit",
