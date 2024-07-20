@@ -241,14 +241,14 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    v-if="oUser.permisos.includes('hmp_actors.index')"
                     prepend-icon="mdi-chevron-right"
                     title="Humillaciones y Menos Precios por actores Principales"
                     :class="[
-                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        route_current == 'hmp_actors.index' ? 'active' : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    @click="cambiarUrl(route('hmp_actors.index'))"
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"
@@ -257,14 +257,14 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    v-if="oUser.permisos.includes('af_lugares_publicos.index')"
                     prepend-icon="mdi-chevron-right"
                     title="Agresiones Físicas en lugares Públicos"
                     :class="[
-                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        route_current == 'af_lugares_publicos.index' ? 'active' : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    @click="cambiarUrl(route('af_lugares_publicos.index'))"
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"
@@ -272,14 +272,14 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.usuarios')"
+                    v-if="oUser.permisos.includes('avcs_lugares_publicos.index')"
                     prepend-icon="mdi-chevron-right"
                     title="Agresiones Verbales de Carácter Sexual en lugares Públicos"
                     :class="[
-                        route_current == 'reportes.usuarios' ? 'active' : '',
+                        route_current == 'avcs_lugares_publicos.index' ? 'active' : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.usuarios'))"
+                    @click="cambiarUrl(route('avcs_lugares_publicos.index'))"
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AfLugaresPublicoController;
+use App\Http\Controllers\AvcsLugaresPublicoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\DistritoController;
+use App\Http\Controllers\HmpActorController;
 use App\Http\Controllers\HmpPoblacionController;
 use App\Http\Controllers\ImportacionController;
 use App\Http\Controllers\InicioController;
@@ -102,14 +105,29 @@ Route::middleware('auth')->group(function () {
         ["index", "store", "update", "show", "destroy"]
     );
 
-       // HMP POBLACION
-       Route::get("/hmp_poblacions/grafico", [HmpPoblacionController::class, 'grafico'])->name("hmp_poblacions.grafico");
-       Route::resource("hmp_poblacions", HmpPoblacionController::class)->only(
-           ["index", "store", "update", "show", "destroy"]
-       );
-   
+    // HMP POBLACION
+    Route::get("/hmp_poblacions/grafico", [HmpPoblacionController::class, 'grafico'])->name("hmp_poblacions.grafico");
+    Route::resource("hmp_poblacions", HmpPoblacionController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );
 
+    // HMP ACTOR
+    Route::get("/hmp_actors/grafico", [HmpActorController::class, 'grafico'])->name("hmp_actors.grafico");
+    Route::resource("hmp_actors", HmpActorController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );
 
+    // HMP ACTOR
+    Route::get("/af_lugares_publicos/grafico", [AfLugaresPublicoController::class, 'grafico'])->name("af_lugares_publicos.grafico");
+    Route::resource("af_lugares_publicos", AfLugaresPublicoController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );   
+
+    // HMP ACTOR
+    Route::get("/avcs_lugares_publicos/grafico", [AvcsLugaresPublicoController::class, 'grafico'])->name("avcs_lugares_publicos.grafico");
+    Route::resource("avcs_lugares_publicos", AvcsLugaresPublicoController::class)->only(
+        ["index", "store", "update", "show", "destroy"]
+    );     
 
     // REPORTES
     Route::get('reportes/usuarios', [ReporteController::class, 'usuarios'])->name("reportes.usuarios");

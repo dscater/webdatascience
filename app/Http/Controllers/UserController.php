@@ -32,6 +32,12 @@ class UserController extends Controller
 
             "hmp_poblacions.index",
 
+            "hmp_actors.index",
+
+            "af_lugares_publicos.index",
+
+            "avcs_lugares_publicos.index",
+
             "configuracions.index",
             "configuracions.create",
             "configuracions.edit",
