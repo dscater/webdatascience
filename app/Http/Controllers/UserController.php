@@ -38,6 +38,68 @@ class UserController extends Controller
 
             "avcs_lugares_publicos.index",
 
+            "atisc_lugares_publicos.index",
+
+            "otrs_actors.index",
+
+            "ayuda_felcv.index",
+
+            "ayuda_slim.index",
+
+            "ayuda_dna.index",
+
+            "ayuda_oi.index",
+
+            "ayuda_familiar.index",
+
+            "ayuda_amiga.index",
+
+            "ayuda_amigo.index",
+
+            "no_ayuda.index",
+
+            "ayuda_pa.index",
+
+            "no_ayuda_verguenza.index",
+
+            "no_ayuda_sepa.index",
+
+            "no_ayuda_miedo.index",
+
+            "no_ayuda_amenaza.index",
+
+            "no_ayuda_porfamilia.index",
+
+            "no_ayuda_sinimportancia.index",
+
+            "no_ayuda_nosabia.index",
+
+            "no_ayuda_nocreejusticia.index",
+
+            "no_ayuda_otromotivo.index",
+
+            "denuncia_agresiones.index",
+
+            "npdf_verguenza.index",
+
+            "npdf_sepa.index",
+
+            "npdf_miedo.index",
+
+            "npdf_amenaza.index",
+
+            "npdf_porfamilia.index",
+
+            "npdf_sinimportancia.index",
+
+            "npdf_nosabia.index",
+
+            "npdf_nocreejusticia.index",
+
+            "npdf_otromotivo.index",
+
+            "atencion_medica_psicologica.index",
+
             "configuracions.index",
             "configuracions.create",
             "configuracions.edit",

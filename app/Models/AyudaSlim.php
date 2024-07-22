@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HmpPoblacion extends Model
+class AyudaSlim extends Model
 {
     use HasFactory;
-
-    protected $table = "hmp_poblacion";
+    
+    protected $table = "ayuda_slim";
 
     protected $fillable = [
-        "hombres",
-        "conocidos",
-        "desconocidos",
-        "mujeres",
+        "cantidad",
         "distrito_id",
         "importacion_id",
         "mes_id",
