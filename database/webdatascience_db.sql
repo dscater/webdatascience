@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 11-07-2024 a las 14:45:14
+-- Tiempo de generación: 23-07-2024 a las 15:54:27
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -903,7 +903,7 @@ CREATE TABLE `configuracions` (
 --
 
 INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `ciudad`, `dir`, `fono`, `correo`, `web`, `actividad`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'WEBDATASCIENCE', 'WDC', 'WEBDATASCIENCE S.A.', 'LA PAZ', 'LOS OLIVOS', '7777777', 'WEBDATASCIENCE@GMAIL.COM', 'WEBDATASCIENCE.COM', 'ACTIVIDAD', 'logo.jpg', NULL, '2024-06-24 17:57:19');
+(1, 'EL ALTO GOBIERNO AUTÓNOMO MUNICIPAL', 'WDC', 'EL ALTO GOBIERNO AUTÓNOMO MUNICIPAL', 'LA PAZ', 'LOS OLIVOS', '7777777', 'WEBDATASCIENCE@GMAIL.COM', 'WEBDATASCIENCE.COM', 'ACTIVIDAD', '1721694401_1.jpg', NULL, '2024-07-23 00:28:03');
 
 -- --------------------------------------------------------
 
@@ -1014,6 +1014,13 @@ CREATE TABLE `historial_accions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `historial_accions`
+--
+
+INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(1, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN USUARIO', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$qhTl073TuOZfN0FpCuEaueLp92v45QHWP63OgTlny1PRyZuE1OVJO<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1111<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 77777777<br/>tipo: ANALISTA DE DATOS<br/>foto: 1721227771_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-07-17 00:00:00<br/>created_at: 2024-07-17 10:49:31<br/>updated_at: 2024-07-17 10:49:31<br/>', NULL, 'USUARIOS', '2024-07-17', '10:49:32', '2024-07-17 14:49:32', '2024-07-17 14:49:32');
 
 -- --------------------------------------------------------
 
@@ -2732,7 +2739,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usuario`, `password`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `dir`, `email`, `fono`, `tipo`, `foto`, `acceso`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$12$65d4fgZsvBV5Lc/AxNKh4eoUdbGyaczQ4sSco20feSQANshNLuxSC', 'admin', NULL, NULL, '0', '', '', 'admin@gmail.com', '', 'ADMINISTRADOR', NULL, 1, '2024-01-31', NULL, NULL);
+(1, 'admin', '$2y$12$65d4fgZsvBV5Lc/AxNKh4eoUdbGyaczQ4sSco20feSQANshNLuxSC', 'admin', NULL, NULL, '0', '', '', 'admin@gmail.com', '', 'ADMINISTRADOR', NULL, 1, '2024-01-31', NULL, NULL),
+(2, 'JPERES', '$2y$12$qhTl073TuOZfN0FpCuEaueLp92v45QHWP63OgTlny1PRyZuE1OVJO', 'JUAN', 'PERES', 'MAMANI', '1111', 'LP', 'LOS OLIVOS', 'JUAN@GMAIL.COM', '77777777', 'ANALISTA DE DATOS', '1721227771_JPERES.jpg', 1, '2024-07-17', '2024-07-17 14:49:31', '2024-07-17 14:49:31');
 
 --
 -- Índices para tablas volcadas
@@ -3261,7 +3269,7 @@ ALTER TABLE `distritos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `hmp_actores`
@@ -3429,7 +3437,7 @@ ALTER TABLE `poblacion_mujeres`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

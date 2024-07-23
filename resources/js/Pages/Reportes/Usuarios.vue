@@ -42,8 +42,8 @@ const txtBtn = computed(() => {
 
 const listTipos = ref([
     { value: "TODOS", label: "TODOS" },
-    { value: "GERENTE", label: "GERENTE" },
-    { value: "OPERADOR", label: "OPERADOR" },
+    { value: "ADMINISTRADOR", label: "ADMINISTRADOR" },
+    { value: "ANALISTA DE DATOS", label: "ANALISTA DE DATOS" },
 ]);
 
 const generarReporte = () => {

@@ -23,7 +23,43 @@ const user_logeado = ref({
 
 const submenus = {
     // graficos
-    "reportes.usuarios": "Graficos",
+    "importacions.index": "Graficos",
+    "poblacion_mujers.index": "Graficos",
+    "hmp_poblacions.index": "Graficos",
+    "hmp_actors.index": "Graficos",
+    "af_lugares_publicos.index": "Graficos",
+    "avcs_lugares_publicos.index": "Graficos",
+    "atisc_lugares_publicos.index": "Graficos",
+    "otrs_actors.index": "Graficos",
+    "ayuda_felcv.index": "Graficos",
+    "ayuda_slim.index": "Graficos",
+    "ayuda_dna.index": "Graficos",
+    "ayuda_oi.index": "Graficos",
+    "ayuda_familiar.index": "Graficos",
+    "ayuda_amiga.index": "Graficos",
+    "ayuda_amigo.index": "Graficos",
+    "no_ayuda.index": "Graficos",
+    "ayuda_pa.index": "Graficos",
+    "no_ayuda_verguenza.index": "Graficos",
+    "no_ayuda_sepa.index": "Graficos",
+    "no_ayuda_miedo.index": "Graficos",
+    "no_ayuda_amenaza.index": "Graficos",
+    "no_ayuda_porfamilia.index": "Graficos",
+    "no_ayuda_sinimportancia.index": "Graficos",
+    "no_ayuda_nosabia.index": "Graficos",
+    "no_ayuda_nocreejusticia.index": "Graficos",
+    "no_ayuda_otromotivo.index": "Graficos",
+    "denuncia_agresiones.index": "Graficos",
+    "npdf_verguenza.index": "Graficos",
+    "npdf_sepa.index": "Graficos",
+    "npdf_miedo.index": "Graficos",
+    "npdf_amenaza.index": "Graficos",
+    "npdf_porfamilia.index": "Graficos",
+    "npdf_sinimportancia.index": "Graficos",
+    "npdf_nosabia.index": "Graficos",
+    "npdf_nocreejusticia.index": "Graficos",
+    "npdf_otromotivo.index": "Graficos",
+    "atencion_medica_psicologica.index": "Graficos",
     // reportes
     "reportes.usuarios": "Reportes",
 };
@@ -184,7 +220,43 @@ const scrollActive = () => {
                 class="mx-3"
                 v-if="
                     oUser.permisos.includes('reportes.usuarios') ||
-                    oUser.permisos.includes('reportes.ingresos')
+                    oUser.permisos.includes('importacions.index') ||
+                    oUser.permisos.includes('poblacion_mujers.index') ||
+                    oUser.permisos.includes('hmp_poblacions.index') ||
+                    oUser.permisos.includes('hmp_actors.index') ||
+                    oUser.permisos.includes('af_lugares_publicos.index') ||
+                    oUser.permisos.includes('avcs_lugares_publicos.index') ||
+                    oUser.permisos.includes('atisc_lugares_publicos.index') ||
+                    oUser.permisos.includes('otrs_actors.index') ||
+                    oUser.permisos.includes('ayuda_felcv.index') ||
+                    oUser.permisos.includes('ayuda_slim.index') ||
+                    oUser.permisos.includes('ayuda_dna.index') ||
+                    oUser.permisos.includes('ayuda_oi.index') ||
+                    oUser.permisos.includes('ayuda_familiar.index') ||
+                    oUser.permisos.includes('ayuda_amiga.index') ||
+                    oUser.permisos.includes('ayuda_amigo.index') ||
+                    oUser.permisos.includes('no_ayuda.index') ||
+                    oUser.permisos.includes('ayuda_pa.index') ||
+                    oUser.permisos.includes('no_ayuda_verguenza.index') ||
+                    oUser.permisos.includes('no_ayuda_sepa.index') ||
+                    oUser.permisos.includes('no_ayuda_miedo.index') ||
+                    oUser.permisos.includes('no_ayuda_amenaza.index') ||
+                    oUser.permisos.includes('no_ayuda_porfamilia.index') ||
+                    oUser.permisos.includes('no_ayuda_sinimportancia.index') ||
+                    oUser.permisos.includes('no_ayuda_nosabia.index') ||
+                    oUser.permisos.includes('no_ayuda_nocreejusticia.index') ||
+                    oUser.permisos.includes('no_ayuda_otromotivo.index') ||
+                    oUser.permisos.includes('denuncia_agresiones.index') ||
+                    oUser.permisos.includes('npdf_verguenza.index') ||
+                    oUser.permisos.includes('npdf_sepa.index') ||
+                    oUser.permisos.includes('npdf_miedo.index') ||
+                    oUser.permisos.includes('npdf_amenaza.index') ||
+                    oUser.permisos.includes('npdf_porfamilia.index') ||
+                    oUser.permisos.includes('npdf_sinimportancia.index') ||
+                    oUser.permisos.includes('npdf_nosabia.index') ||
+                    oUser.permisos.includes('npdf_nocreejusticia.index') ||
+                    oUser.permisos.includes('npdf_otromotivo.index') ||
+                    oUser.permisos.includes('atencion_medica_psicologica.index')
                 "
             >
                 <template v-slot:activator="{ props }">
@@ -794,14 +866,22 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('atencion_medica_psicologica.index')"
+                    v-if="
+                        oUser.permisos.includes(
+                            'atencion_medica_psicologica.index'
+                        )
+                    "
                     prepend-icon="mdi-chevron-right"
                     title="Mujeres que recibieron Atención Médica o Psicológica por estos Hechos"
                     :class="[
-                        route_current == 'atencion_medica_psicologica.index' ? 'active' : '',
+                        route_current == 'atencion_medica_psicologica.index'
+                            ? 'active'
+                            : '',
                         drawer ? 'px-3' : '',
                     ]"
-                    @click="cambiarUrl(route('atencion_medica_psicologica.index'))"
+                    @click="
+                        cambiarUrl(route('atencion_medica_psicologica.index'))
+                    "
                     link
                 >
                     <v-tooltip color="white" activator="parent" location="end"

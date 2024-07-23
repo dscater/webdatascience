@@ -11,5 +11,7 @@ class Anio extends Model
 
     protected $table = "anios";
 
+    public $timestamps = false;
+
     protected $fillable = ["anio"];
 }

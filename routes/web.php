@@ -126,6 +126,7 @@ Route::middleware('auth')->group(function () {
     // IMPORTACIÓN
     Route::get("/importacions/paginado", [ImportacionController::class, 'paginado'])->name("importacions.paginado");
     Route::get("/importacions/listado", [ImportacionController::class, 'listado'])->name("importacions.listado");
+    Route::post("/importacions/importar_archivo", [ImportacionController::class, 'importar_archivo'])->name("importacions.importar_archivo");
     Route::resource("importacions", ImportacionController::class)->only(
         ["index", "store", "update", "show", "destroy"]
     );

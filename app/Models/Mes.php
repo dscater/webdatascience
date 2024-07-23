@@ -10,6 +10,7 @@ class Mes extends Model
     use HasFactory;
 
     protected $table = "meses";
+    public $timestamps = false;
 
     protected $fillable = ["mes"];
 }

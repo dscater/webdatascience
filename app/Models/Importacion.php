@@ -10,7 +10,7 @@ class Importacion extends Model
     use HasFactory;
 
     protected $table = "importaciones";
-
+    public $timestamps = false;
     protected $fillable = [
         "archivo",
         "fecha"
