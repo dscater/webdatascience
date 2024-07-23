@@ -57,11 +57,13 @@ onMounted(() => {
                                     class="w-50 mx-auto"
                                 ></v-img>
                             </v-card-text>
-                            <v-card-title class="bg-principal">
-                                <h3 class="text-center mb-0 pb-0 text-h4 text-secundario font-weight-bold">
+                            <v-card-text class="bg-principal">
+                                <p
+                                    class="nombre_rs"
+                                >
                                     {{ oConfiguracion.razon_social }}
-                                </h3>
-                            </v-card-title>
+                                </p>
+                            </v-card-text>
                             <form @submit.prevent="submit">
                                 <v-card-text>
                                     <h4 class="text-center text-h6">

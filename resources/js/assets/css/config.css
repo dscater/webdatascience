@@ -16,9 +16,18 @@ html {
     overflow-y: scroll;
     overflow-y: overlay;
 }
+.nombre_rs{
+    color: var(--secundario);
+    font-weight: bold;
+    max-width: 100%;
+    text-align: center;
+    font-size: 1.7em;
+    line-height: 0.8cm;
+    word-break: break-word !important;
+}
 
 .text-secundario {
-    color: var(--secundario)!important;
+    color: var(--secundario) !important;
 }
 
 body,
